@@ -1,0 +1,16 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Dialog id="confMessage" title="Information" class="sapUiSizeCompact sapUiLargeMargin" icon="sap-icon://message-information">
+		<l:VerticalLayout class="sapUiContentPadding">
+			<Text text="Following configuration items require manual configuration activity from Basis Team"></Text>
+			<Text text=""></Text>
+			<Text text="Alias" class="bulletlist"></Text>
+			<Text text="Notes" class="bulletlist"></Text>
+			<Text text="Software components" class="bulletlist"></Text>
+			<Text text=""></Text>
+			<Text text="You need to download the list of applicable System Aliases, Notes, Software Components from 'Summary' step"></Text>
+		</l:VerticalLayout>
+		<OverflowToolbar><ToolbarSpacer/>
+			<Button type="Accept" text="Ok" press="closeConfMessageDialog"></Button>
+		</OverflowToolbar>
+	</Dialog>
+</core:FragmentDefinition>

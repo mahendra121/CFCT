@@ -1,0 +1,16 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Dialog id="guideMessage" title="Information" class="sapUiSizeCompact sapUiLargeMargin" icon="sap-icon://message-information">
+		<l:VerticalLayout class="sapUiContentPadding">
+			<Text
+				text="Please ensure to download the activated OData and ICF services for activation in subsequent systems in the landscape post TR imports:"></Text>
+			<Text text=""></Text>
+			<Text text="Steps:"></Text>
+			<Text text="Go to STC01" class="bulletlist"></Text>
+			<Text text="Use taskslist SAP_BASIS_ACTIVATE_ICF_NODES for ICF services and tasklist SAP_GATEWAY_ACTIVATE_ODATA_SERV for Odata services"
+				class="bulletlist"></Text>
+		</l:VerticalLayout>
+		<OverflowToolbar><ToolbarSpacer/>
+			<Button type="Accept" text="Ok" press="closeGuideMessageDialog"></Button>
+		</OverflowToolbar>
+	</Dialog>
+</core:FragmentDefinition>

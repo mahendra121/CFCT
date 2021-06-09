@@ -1,0 +1,54 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Dialog id="trDialog" title="Transport Settings" class="sapUiSizeCompact" icon="sap-icon://shipping-status">
+		<!--<form:SimpleForm layout="ResponsiveGridLayout" editable="true" adjustLabelSpan="false" labelSpanXL="2" labelSpanL="2" labelSpanM="2"-->
+		<!--	labelSpanS="5">-->
+		<!--	<Input required="true" id="id-inpEmail"/>-->
+		<!--</form:SimpleForm>-->
+		<VBox>
+			<CheckBox id="id_cbTR" class="sapUiSmallMarginBegin" text="Capture Configuration in Transport Request" selected="true" select="selectTR"/>
+		</VBox>
+		<VBox id="id_vbTR" class="sapUiSmallMargin">
+			<f:Form id="FormChange354" editable="true">
+				<!--<f:title>-->
+				<!--	<core:Title text="Address"/>-->
+				<!--</f:title>-->
+				<f:layout>
+					<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+						emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+				</f:layout>
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="Package">
+								<f:fields>
+									<ComboBox id="id_Pkg" items="{ path: '/results', sorter: { path: 'key' } }" required="true">
+										<core:Item key="{id}" text="{id} : {description}"/>
+									</ComboBox>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Workbench Request">
+								<f:fields>
+									<ComboBox id="id_WBTR" items="{ path: '/results', sorter: { path: 'key' } }" required="true">
+										<core:Item key="{id}" text="{id} : {description}"/>
+									</ComboBox>
+									<!--<Input value="{Street}"/>-->
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Customizing Request">
+								<f:fields>
+									<ComboBox id="id_CTR" items="{ path: '/results', sorter: { path: 'key' } }" required="true">
+										<core:Item key="{id}" text="{id} : {description}"/>
+									</ComboBox>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+		</VBox>
+		<OverflowToolbar><ToolbarSpacer/>
+			<Button text="Ok" press="okTR"></Button>
+			<!--<Button type="Reject" text="Cancel" press="closeEmail"></Button>-->
+		</OverflowToolbar>
+	</Dialog>
+</core:FragmentDefinition>

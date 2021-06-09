@@ -1,0 +1,820 @@
+<mvc:View controllerName="com.apac.toolZ_FIORI_AUTO_CONFIG.controller.home" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+	xmlns:core="sap.ui.core" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.ui.layout.form" class="sapUiSizeCompact"
+	xmlns:u="sap.ui.unified" xmlns:table="sap.ui.table" xmlns:m="sap.m" xmlns:viz="sap.viz.ui5.controls" xmlns:layout="sap.ui.layout"
+	xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz.data="sap.viz.ui5.data" xmlns:tnt="sap.tnt">
+	<App>
+		<pages>
+			<Page>
+				<!--title="{i18n>title}" icon="http://www.sap.com/global/ui/images/global/sap-logo.png">-->
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Image height="32px" src="logo-icon/capgemini-logo.png"></Image>
+						</contentLeft>
+						<contentMiddle>
+							<Title text="{i18n>title}"/>
+						</contentMiddle>
+					</Bar>
+				</customHeader>
+				<content>
+					<Wizard id="_idSteps1" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" complete="wizardCompletedHandler"
+						showNextButton="false">
+						<WizardStep id="step1" title="Status - Fiori Foundational Configuration" nextStep="step2">
+							<IconTabBar id="idIconTabBar" select="handleIconTabBarSelect" class="sapUiResponsiveContentPadding" selectedKey="LS">
+								<items>
+									<IconTabFilter icon="sap-icon://internet-browser" key="LS" text="Launchpad Services" tooltip="Launchpad Services"/>
+									<IconTabSeparator icon=""/>
+									<IconTabFilter icon="sap-icon://search" key="ES" text="Enterprise Search" tooltip="Enterprise Search"/>
+									<IconTabSeparator icon=""/>
+									<IconTabFilter icon="sap-icon://inventory" key="GI" text="GUI Integration" tooltip="GUI Integration"/>
+									<IconTabSeparator icon=""/>
+									<IconTabFilter icon="sap-icon://business-objects-mobile" key="BW" text="Embedded BW Client" tooltip="Embedded BW Client"/>
+									<IconTabFilter icon="sap-icon://it-system" key="SA" text="System Alias" tooltip="System Alias" visible="false"/>
+								</items>
+							</IconTabBar>
+							<Button id="id-btnStep1" text="Next Step" press="nextStep"/>
+						</WizardStep>
+						<WizardStep id="step2" title="Input - Application Scope" nextStep="step3">
+							<VBox>
+								<HBox class="sapUiSmallMargin">
+									<HBox class="paddingLbl">
+										<Label text="CSV File Type:"/>
+									</HBox>
+									<RadioButtonGroup id="rbg1" select="onRGB1">
+										<RadioButton id="RB1-1" text="CSV File with Metadata (FIORI Library Downloaded File) - Recommended"/>
+										<RadioButton id="RB1-2" text="CSV File with Application ID's" editable="false"/>
+									</RadioButtonGroup>
+								</HBox>
+								<HBox>
+									<!--<core:Icon  class="sapMITBFilterDefault sapMITBFilterIcon sapUiIcon sapUiIconMirrorInRTL" src="sap-icon://hint" color="#031E48"></core:Icon>-->
+									<!--<core:Icon class="infoIcon" src="sap-icon://hint">-->
+									<!--<core:layoutData>-->
+									<!--  <FlexItemData growFactor="1"/>-->
+									<!--</core:layoutData>-->
+									<!--</core:Icon>-->
+									<u:FileUploader id="_idFileUploader" name="myFileUpload" uploadUrl="upload/" tooltip="Upload your file to the local server"
+										uploadComplete="handleUploadComplete" change="handleChange" enabled="true"/>
+									<ComboBox id="id-relIDCombo" class="sapUiTinyMarginBegin releaseIDCombo" items="{/}" visible="false" enabled="false" change='selectRelease'>
+										<core:Item key="{releaseId}" text="{releaseName}"/>
+									</ComboBox>
+								</HBox>
+								<!--<Panel id="id-overStat" headerText="Overall statistics by application count" expandable="false" class="sapUiContentPadding chartHeader"-->
+								<!--  width="auto" visible="false">-->
+								<!--<VBox class="sapUiSmallMargin">-->
+								<f:SimpleForm id="id-overStatForm" title="Overall statistics by application count" class="sapUiContentPadding statLabel" width="auto"
+									visible="false" layout="ResponsiveGridLayout">
+									<!--<f:SimpleForm title="Multiple Columns via GridData" editable="true" layout="ResponsiveGridLayout">-->
+									<Label text="Total Applications" class="formEleStyle">
+										<layoutData>
+											<layout:GridData span="L2 M2"/>
+										</layoutData>
+									</Label>
+									<Text class="statFormText formEleStyle">
+										<layoutData>
+											<layout:GridData span="L2 M2"/>
+										</layoutData>
+									</Text>
+									<Label text="UI5 Applications" class="formEleStyle">
+										<layoutData>
+											<layout:GridData span="L2 M2"/>
+										</layoutData>
+									</Label>
+									<Text class="statFormText formEleStyle">
+										<layoutData>
+											<layout:GridData span="L2 M2"/>
+										</layoutData>
+									</Text>
+									<Label text="WebGUI Applications" class="formEleStyle">
+										<layoutData>
+											<layout:GridData span="L2 M2"/>
+										</layoutData>
+									</Label>
+									<Text class="statFormText formEleStyle">
+										<layoutData>
+											<layout:GridData span="L2 M2"/>
+										</layoutData>
+									</Text>
+									<!--<Label text="LOB's mapped to UI5 apps">-->
+									<!--  <layoutData>-->
+									<!--    <layout:GridData span="L2 M2"/>-->
+									<!--  </layoutData>-->
+									<!--</Label>-->
+									<!--<Text class="statFormText">-->
+									<!--  <layoutData>-->
+									<!--    <layout:GridData span="L4 M4"/>-->
+									<!--  </layoutData>-->
+									<!--</Text>-->
+									<!--<Label text="Failed to fetch details">-->
+									<!--  <layoutData>-->
+									<!--    <layout:GridData span="L2 M2"/>-->
+									<!--  </layoutData>-->
+									<!--</Label>-->
+									<!--<Text class="statFormText">-->
+									<!--  <layoutData>-->
+									<!--    <layout:GridData span="L4 M4"/>-->
+									<!--  </layoutData>-->
+									<!--</Text>-->
+								</f:SimpleForm>
+								<!--<layout:HorizontalLayout class="sapUiContentPadding">-->
+								<!--  <layout:content>-->
+								<!--    <Label textAlign="Center" text="Label A (required)" labelFor="input-a"/>-->
+								<!--    <Input id="input-a" required="true"/>-->
+								<!--    <Label text="Label B (bold)" labelFor="input-b" design="Bold"/>-->
+								<!--    <Input id="input-b"/>-->
+								<!--    <Label text="Label C (normal)" labelFor="input-c"/>-->
+								<!--    <Input id="input-c"/>-->
+								<!--  </layout:content>-->
+								<!--</layout:HorizontalLayout>-->
+								<!--</VBox>-->
+								<VBox id="id-overStat" visible="false">
+									<layout:FixFlex id='chartFixFlexInit' minFlexSize="250">
+										<layout:flexContent>
+											<viz:Popover id="idPopOverInit"></viz:Popover>
+											<viz:VizFrame id="idVizFrameInit" uiConfig="{applicationSet:'fiori'}" height='100%' width="100%" vizType='stacked_bar'>
+												<viz:dataset>
+													<viz.data:FlattenedDataset data="{/}">
+														<viz.data:dimensions>
+															<viz.data:DimensionDefinition name="Measure" value="{Measure}"/>
+															<viz.data:DimensionDefinition name="Type" value="{Type}"/>
+														</viz.data:dimensions>
+														<viz.data:measures>
+															<!--<viz.data:MeasureDefinition name="Revenue" value="{Revenue}"/>-->
+															<viz.data:MeasureDefinition name="Count" value="{Count}"/>
+														</viz.data:measures>
+													</viz.data:FlattenedDataset>
+												</viz:dataset>
+												<viz:feeds>
+													<!--<viz.feeds:FeedItem uid="size"  type="Measure" values="Status"/>-->
+													<!--<viz.feeds:FeedItem uid="color" type="Dimension" values="Type"/>-->
+													<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Count"/>
+													<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Measure"/>
+													<viz.feeds:FeedItem uid="color" type="Dimension" values="Type"/>
+												</viz:feeds>
+											</viz:VizFrame>
+										</layout:flexContent>
+									</layout:FixFlex>
+									<HBox>
+										<Text class="sapUiLargeMarginBegin noteStyle" text="Note:"/>
+										<Text class="sapUiTinyMarginBegin" text=" Above graph shows the LOBs mapped to the applications"/>
+									</HBox>
+								</VBox>
+								<!--</f:SimpleForm>-->
+								<!--</Panel>-->
+								<Panel id="id-overStat1" headerText="Overall segregation of application types" expandable="false" class="sapUiContentPadding chartHeader"
+									width="auto" visible="false">
+									<layout:FixFlex id='chartFixFlexInitDonut' minFlexSize="250">
+										<layout:flexContent>
+											<viz:Popover id="idPopOverInitDonut"></viz:Popover>
+											<viz:VizFrame id="idVizFrameInitDonut" uiConfig="{applicationSet:'fiori'}" height='100%' width="100%" vizType='donut'>
+												<viz:dataset>
+													<viz.data:FlattenedDataset data="{/}">
+														<viz.data:dimensions>
+															<viz.data:DimensionDefinition name="Measure" value="{Measure}"/>
+															<!--<viz.data:DimensionDefinition name="Object" value="{Object}"/>-->
+														</viz.data:dimensions>
+														<viz.data:measures>
+															<!--<viz.data:MeasureDefinition name="Revenue" value="{Revenue}"/>-->
+															<viz.data:MeasureDefinition name="Count" value="{Count}"/>
+														</viz.data:measures>
+													</viz.data:FlattenedDataset>
+												</viz:dataset>
+												<viz:feeds>
+													<viz.feeds:FeedItem uid="size" type="Measure" values="Count"/>
+													<viz.feeds:FeedItem uid="color" type="Dimension" values="Measure"/>
+												</viz:feeds>
+											</viz:VizFrame>
+										</layout:flexContent>
+									</layout:FixFlex>
+								</Panel>
+								<Button id="id-btnStep2" text="Next Step" press="nextStep" visible="false"/>
+							</VBox>
+						</WizardStep>
+						<WizardStep id="step3" title="Automate Validation - Application Configurations" nextStep="step4">
+							<Panel id='id-panelOdataTable' headerText="Required OData Services" expandable="true" class="sapUiContentPadding" width="auto">
+								<content>
+									<table:Table id="id-OdataTable" selectionMode="None" enableSelectAll="false" visibleRowCount="5">
+										<table:extension>
+											<m:OverflowToolbar>
+												<m:Title text="OData Services"/>
+												<m:ToolbarSpacer/>
+												<Button id="btnValidateOData" class="activeButton" tooltip="Validate" icon="sap-icon://survey" press="validateServicesOData" text="Validate"/>
+												<RadioButtonGroup id="rbg2" columns="2" select="onRGB2" visible="false">
+													<RadioButton id="RB2-1" text="All"/>
+													<RadioButton id="RB2-2" text="Inactive"/>
+												</RadioButtonGroup>
+												<!--<Button id="btnActivateOData" class="activeButton" tooltip="Activate" icon="sap-icon://activate" press="activateServicesOData"-->
+												<!--  visible="false" text="Activate"/>-->
+											</m:OverflowToolbar>
+										</table:extension>
+										<table:columns>
+											<table:Column>
+												<Label text="App Id"/>
+												<table:template>
+													<Text text="{fioriId}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column >
+												<Label text="App Name"/>
+												<table:template>
+													<Text text="{AppName}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column >
+												<Label text="OData Service"/>
+												<table:template>
+													<Text text="{PrimaryODataServiceName}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column id="id-ODataVersion">
+												<Label text="Version"/>
+												<table:template>
+													<Text text="{PrimaryODataServiceVersion}"></Text>
+												</table:template>
+											</table:Column>
+											<!--<table:Column id="id-ODataAlias">-->
+											<!--  <Label text="Alias"/>-->
+											<!--  <table:template>-->
+											<!--    <Input type="Text" textFormatMode="KeyValue" placeholder="Enter Alias..." showValueHelp="true"-->
+											<!--      valueHelpRequest="handleValueHelp" valueHelpOnly="true"></Input>-->
+											<!--  </table:template>-->
+											<!--</table:Column>-->
+											<table:Column id="id-ODataStatus" hAlign="Center">
+												<Label text="Status"/>
+												<table:template>
+													<!--<Text text="{Status}"></Text>-->
+													<core:Icon src="{path: 'Status', formatter: '.formatter.serviceStatus'}" class="size3"
+														color="{path: 'Status', formatter: '.formatter.colorStatus'}">
+														<core:layoutData>
+															<FlexItemData growFactor="1"/>
+														</core:layoutData>
+													</core:Icon>
+													<!--<Image src="{path: 'Status', formatter: '.formatter.serviceStatus'}" width="" decorative="false" backgroundSize="10px"/>-->
+													<!--<Switch state="{= ${Status} === '1' ? true : false}" customTextOn="Yes" customTextOff="No"/>-->
+												</table:template>
+											</table:Column>
+										</table:columns>
+									</table:Table>
+								</content>
+							</Panel>
+							<Panel id='id-panelIcfNodesTable' headerText="Required ICF Nodes Services" expandable="true" class="sapUiContentPadding" width="auto">
+								<content>
+									<table:Table id="id-IcfNodesTable" selectionMode="None" enableSelectAll="false" visibleRowCount="5">
+										<table:extension>
+											<m:OverflowToolbar>
+												<m:Title text="ICF Nodes"/>
+												<m:ToolbarSpacer/>
+												<Button id="btnValidateSICF" class="activeButton" tooltip="Validate" icon="sap-icon://survey" press="validateServicesSICF" text="Validate"/>
+												<RadioButtonGroup id="rbg3" columns="2" select="onRGB3" visible="false">
+													<RadioButton id="RB3-1" text="All"/>
+													<RadioButton id="RB3-2" text="Inactive"/>
+												</RadioButtonGroup>
+												<!--<Button id="btnActivateSICF" class="activeButton" tooltip="Activate" icon="sap-icon://activate" press="activateServicesSICF" enabled="false"-->
+												<!--  text="Activate" visible="false"/>-->
+											</m:OverflowToolbar>
+										</table:extension>
+										<table:columns>
+											<table:Column >
+												<Label text="App Id"/>
+												<table:template>
+													<Text text="{fioriId}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column >
+												<Label text="App Name"/>
+												<table:template>
+													<Text text="{AppName}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column >
+												<Label text="ICF Nodes"/>
+												<table:template>
+													<Text text="{BSPApplicationURL}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column id="id-SICFType">
+												<Label text="Type"/>
+												<table:template>
+													<Text text="{Type}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column id="id-SICFStatus" hAlign="Center">
+												<Label text="Status"/>
+												<table:template>
+													<!--<Text text="{Status}"></Text>-->
+													<core:Icon src="{path: 'Status', formatter: '.formatter.serviceStatus'}" class="size3"
+														color="{path: 'Status', formatter: '.formatter.colorStatus'}">
+														<core:layoutData>
+															<FlexItemData growFactor="1"/>
+														</core:layoutData>
+													</core:Icon>
+													<!--<Image src="{path: 'Status', formatter: '.formatter.serviceStatus'}" width="" decorative="false" backgroundSize="10px"/>-->
+												</table:template>
+											</table:Column>
+										</table:columns>
+									</table:Table>
+								</content>
+							</Panel>
+							<Panel id='id-panelAliasTable' headerText="Required Alias" expandable="true" class="sapUiContentPadding" width="auto">
+								<content>
+									<table:Table id="id-AliasTable" selectionMode="None" enableSelectAll="false" visibleRowCount="5">
+										<table:extension>
+											<m:OverflowToolbar>
+												<m:Title text="Alias"/>
+												<m:ToolbarSpacer/>
+												<Button id="btnValidateAlias" class="activeButton" tooltip="Validate" icon="sap-icon://survey" press="validateAlias" text="Validate"/>
+												<RadioButtonGroup id="rbg4" columns="2" select="onRGB4" visible="false">
+													<RadioButton id="RB4-1" text="All"/>
+													<RadioButton id="RB4-2" text="Inactive"/>
+												</RadioButtonGroup>
+												<!--<Button id="btnActivateAlias" class="activeButton" tooltip="Activate" icon="sap-icon://activate" press="activateAlias" enabled="false"-->
+												<!--  text="Activate" visible="false"/>-->
+											</m:OverflowToolbar>
+										</table:extension>
+										<table:columns>
+											<table:Column>
+												<Label text="App Id"/>
+												<table:template>
+													<Text text="{fioriId}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column >
+												<Label text="System Alias"/>
+												<table:template>
+													<Text text="{Alias}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column id="id-AliasStatus" hAlign="Center">
+												<Label text="Status"/>
+												<table:template>
+													<!--<Text text="{Status}"></Text>-->
+													<core:Icon src="{path: 'Status', formatter: '.formatter.serviceStatus'}" class="size3"
+														color="{path: 'Status', formatter: '.formatter.colorStatus'}">
+														<core:layoutData>
+															<FlexItemData growFactor="1"/>
+														</core:layoutData>
+													</core:Icon>
+													<!--<Image src="{path: 'Status', formatter: '.formatter.serviceStatus'}" width="" decorative="false" backgroundSize="10px"/>-->
+												</table:template>
+											</table:Column>
+										</table:columns>
+									</table:Table>
+								</content>
+							</Panel>
+							<Panel id='id-panelNoteTable' headerText="Required Notes" expandable="true" class="sapUiContentPadding" width="auto">
+								<content>
+									<table:Table id="id-NoteTable" selectionMode="None" enableSelectAll="false" visibleRowCount="5">
+										<table:extension>
+											<m:OverflowToolbar>
+												<m:Title text="Notes"/>
+												<m:ToolbarSpacer/>
+												<Button id="btnValidateNote" class="activeButton" tooltip="Validate" icon="sap-icon://survey" press="validateNote" text="Validate"/>
+												<!--<Button id="btnActivateNote" class="activeButton" tooltip="Activate" icon="sap-icon://activate" press="activateNote" enabled="false"-->
+												<!--text="Activate" visible="false"/>-->
+											</m:OverflowToolbar>
+										</table:extension>
+										<table:columns width="70%">
+											<table:Column>
+												<Label text="App Id"/>
+												<table:template>
+													<Text text="{fioriId}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column width="15%">
+												<Label text="Note"/>
+												<table:template>
+													<Text text="{NoteNo}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column id="id-NoteStatus" hAlign="Center" width="15%">
+												<Label text="Status"/>
+												<table:template>
+													<Text text="{Status}"></Text>
+													<core:Icon src="{path: 'Status', formatter: '.formatter.serviceStatus'}" class="size3"
+														color="{path: 'Status', formatter: '.formatter.colorStatus'}">
+														<core:layoutData>
+															<FlexItemData growFactor="1"/>
+														</core:layoutData>
+													</core:Icon>
+													<!--<Image src="{path: 'Status', formatter: '.formatter.serviceStatus'}" width="" decorative="false" backgroundSize="10px"/>-->
+												</table:template>
+											</table:Column>
+										</table:columns>
+									</table:Table>
+								</content>
+							</Panel>
+							<Panel id='id-panelCompTable' headerText="Required Software Components" expandable="true" class="sapUiContentPadding" width="auto"
+								visible="true">
+								<content>
+									<HBox>
+										<table:Table id="id-CompTable" selectionMode="None" enableSelectAll="false" visibleRowCount="5" class="sapUiTinyMarginEnd">
+											<table:extension>
+												<m:OverflowToolbar>
+													<m:ToolbarSpacer/>
+													<m:Title text="Frontend"/>
+													<m:ToolbarSpacer/>
+													<Button id="btnValidateComp" class="activeButton" tooltip="Validate" icon="sap-icon://survey" press="validateComp" text="Validate"/>
+													<!--<Button id="btnActivateNote" class="activeButton" tooltip="Activate" icon="sap-icon://activate" press="activateNote" enabled="false"-->
+													<!--text="Activate" visible="false"/>-->
+												</m:OverflowToolbar>
+											</table:extension>
+											<table:columns>
+												<table:Column width="33%">
+													<Label text="App Id"/>
+													<table:template>
+														<Text text="{FfioriId}"></Text>
+													</table:template>
+												</table:Column>
+												<table:Column width="10%">
+													<Label text="Component"/>
+													<table:template>
+														<Text text="{frontComp}"></Text>
+													</table:template>
+												</table:Column>
+												<table:Column id="id-FCompStatus" hAlign="Center" width="7%">
+													<Label text="Status"/>
+													<table:template>
+														<Text text="{FStatus}"></Text>
+														<core:Icon src="{path: 'FStatus', formatter: '.formatter.serviceStatus'}" class="size3"
+															color="{path: 'FStatus', formatter: '.formatter.colorStatus'}" visible="{= ${frontComp} === '' ? false : true }">
+															<core:layoutData>
+																<FlexItemData growFactor="1"/>
+															</core:layoutData>
+														</core:Icon>
+													</table:template>
+												</table:Column>
+											</table:columns>
+										</table:Table>
+										<table:Table id="id-CompTable1" selectionMode="None" enableSelectAll="false" visibleRowCount="5" class="sapUiTinyMarginBegin">
+											<table:extension>
+												<m:OverflowToolbar>
+													<m:ToolbarSpacer/>
+													<m:Title text="Backend"/>
+													<m:ToolbarSpacer/>
+													<Button id="btnValidateComp1" class="activeButton" tooltip="Validate" icon="sap-icon://survey" press="validateComp" text="Validate"/>
+													<!--<Button id="btnActivateNote" class="activeButton" tooltip="Activate" icon="sap-icon://activate" press="activateNote" enabled="false"-->
+													<!--text="Activate" visible="false"/>-->
+												</m:OverflowToolbar>
+											</table:extension>
+											<table:columns>
+												<table:Column width="33%">
+													<Label text="App Id"/>
+													<table:template>
+														<Text text="{BfioriId}"></Text>
+													</table:template>
+												</table:Column>
+												<table:Column width="10%">
+													<Label text="Component"/>
+													<table:template>
+														<Text text="{backComp}"></Text>
+													</table:template>
+												</table:Column>
+												<table:Column id="id-BCompStatus" hAlign="Center" width="7%">
+													<Label text="Status"/>
+													<table:template>
+														<Text text="{BStatus}"></Text>
+														<core:Icon src="{path: 'BStatus', formatter: '.formatter.serviceStatus'}" class="size3"
+															color="{path: 'BStatus', formatter: '.formatter.colorStatus'}" visible="{= ${backComp} === '' ? false : true }">
+															<core:layoutData>
+																<FlexItemData growFactor="1"/>
+															</core:layoutData>
+														</core:Icon>
+													</table:template>
+												</table:Column>
+											</table:columns>
+										</table:Table>
+									</HBox>
+								</content>
+							</Panel>
+							<Button id="id-btnStep3" text="Next Step" press="handleLinkPress" enabled="false"/>
+							<!--<Button id="id-btnStep3" text="Go to Application Configuration Analyzer" press="handleLinkPress" enabled="false"/>-->
+						</WizardStep>
+						<WizardStep id="step4" title="Application Configuration Analyzer" nextStep="step5">
+							<content>
+								<Panel headerText="Configuration Statistics by Count" expandable="false" class="sapUiContentPadding chartHeader" width="auto">
+									<layout:FixFlex id='chartFixFlex' minFlexSize="250">
+										<layout:flexContent>
+											<viz:Popover id="idPopOver"></viz:Popover>
+											<viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}" height='100%' width="100%" vizType='stacked_bar'>
+												<viz:dataset>
+													<viz.data:FlattenedDataset data="{/}">
+														<viz.data:dimensions>
+															<viz.data:DimensionDefinition name="Measure" value="{Measure}"/>
+															<viz.data:DimensionDefinition name="Type" value="{Type}"/>
+														</viz.data:dimensions>
+														<viz.data:measures>
+															<!--<viz.data:MeasureDefinition name="Revenue" value="{Revenue}"/>-->
+															<viz.data:MeasureDefinition name="Count" value="{Count}"/>
+														</viz.data:measures>
+													</viz.data:FlattenedDataset>
+												</viz:dataset>
+												<viz:feeds>
+													<!--<viz.feeds:FeedItem uid="size"  type="Measure" values="Status"/>-->
+													<!--<viz.feeds:FeedItem uid="color" type="Dimension" values="Type"/>-->
+													<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Count"/>
+													<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Measure"/>
+													<viz.feeds:FeedItem uid="color" type="Dimension" values="Type"/>
+												</viz:feeds>
+											</viz:VizFrame>
+										</layout:flexContent>
+									</layout:FixFlex>
+								</Panel>
+								<Panel headerText="Configuration Statistics by Percentage" expandable="false" class="sapUiContentPadding chartHeader" width="auto">
+									<layout:FixFlex id='chartFixFlexDonut' minFlexSize="250">
+										<layout:flexContent>
+											<viz:Popover id="idPopOverDonut"></viz:Popover>
+											<viz:VizFrame id="idVizFrameDonut" uiConfig="{applicationSet:'fiori'}" height='100%' width="100%" vizType='donut'>
+												<viz:dataset>
+													<viz.data:FlattenedDataset data="{/}">
+														<viz.data:dimensions>
+															<viz.data:DimensionDefinition name="Type" value="{Type}"/>
+															<!--<viz.data:DimensionDefinition name="Object" value="{Object}"/>-->
+														</viz.data:dimensions>
+														<viz.data:measures>
+															<!--<viz.data:MeasureDefinition name="Revenue" value="{Revenue}"/>-->
+															<viz.data:MeasureDefinition name="Count" value="{Count}"/>
+														</viz.data:measures>
+													</viz.data:FlattenedDataset>
+												</viz:dataset>
+												<viz:feeds>
+													<viz.feeds:FeedItem uid="size" type="Measure" values="Count"/>
+													<viz.feeds:FeedItem uid="color" type="Dimension" values="Type"/>
+												</viz:feeds>
+											</viz:VizFrame>
+										</layout:flexContent>
+									</layout:FixFlex>
+								</Panel>
+							</content>
+							<Button id="id-btnStep4" text="Next Step" press="goToAutoConfig"/>
+							<!--<Button id="id-btnStep4" text="Go to auto-configure the services" press="goToAutoConfig"/>-->
+						</WizardStep>
+						<WizardStep id="step5" title="Automate Configurations - Applications" nextStep="step6">
+							<Panel id='id-panelOdataTable1' headerText="Activate OData Services" expandable="true" class="sapUiContentPadding" width="auto">
+								<content>
+									<table:Table id="id-OdataTable1" selectionMode="None" enableSelectAll="false" visibleRowCount="5">
+										<table:extension>
+											<m:OverflowToolbar>
+												<m:Title text="OData Services"/>
+												<m:ToolbarSpacer/>
+												<Label text="Select Alias:"/>
+												<ComboBox id="id-CBAlias" items="{ path: '/', sorter: { path: 'SYSALIAS' } }" change="changeCBAlias">
+													<core:Item key="{SYSALIAS}" text="{SYSALIAS}"/>
+												</ComboBox>
+												<Button id="btnActivateOData" class="activeButton" tooltip="Activate" icon="sap-icon://activate" press="activateServicesOData"
+													text="Activate" enabled="false"/>
+												<Link id="btnDownloadOData" class="activeButton" tooltip="Download Activated Services" text="Download Activated Services"
+													press="downloadOData" enabled="false"/>
+												<!--<Button id="btnDownloadOData" class="activeButton" tooltip="Download" icon="sap-icon://download" press="downloadOData" text="Download"-->
+												<!--  enabled="false"/>-->
+											</m:OverflowToolbar>
+										</table:extension>
+										<table:columns>
+											<table:Column>
+												<Label text="App Id"/>
+												<table:template>
+													<Text text="{fioriId}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column >
+												<Label text="App Name"/>
+												<table:template>
+													<Text text="{AppName}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column >
+												<Label text="OData Service"/>
+												<table:template>
+													<Text text="{PrimaryODataServiceName}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column>
+												<Label text="Version"/>
+												<table:template>
+													<Text text="{PrimaryODataServiceVersion}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column id="id-ODataAlias">
+												<Label text="Alias"/>
+												<table:template>
+													<Input id="id-AliasInput" type="Text" textFormatMode="KeyValue" placeholder="Enter Alias..." showValueHelp="true"
+														valueHelpRequest="handleValueHelp" valueHelpOnly="true" value="{Alias}"></Input>
+												</table:template>
+											</table:Column>
+											<table:Column hAlign="Center">
+												<Label text="Status"/>
+												<table:template>
+													<core:Icon src="{path: 'Status', formatter: '.formatter.serviceStatus'}" class="size3"
+														color="{path: 'Status', formatter: '.formatter.colorStatus'}">
+														<core:layoutData>
+															<FlexItemData growFactor="1"/>
+														</core:layoutData>
+													</core:Icon>
+													<!--<Image src="{path: 'Status', formatter: '.formatter.serviceStatus'}" width="" decorative="false" backgroundSize="10px"/>-->
+												</table:template>
+											</table:Column>
+										</table:columns>
+									</table:Table>
+								</content>
+							</Panel>
+							<Panel id='id-panelIcfNodesTable1' headerText="Activate ICF Nodes Services" expandable="true" class="sapUiContentPadding" width="auto">
+								<content>
+									<table:Table id="id-IcfNodesTable1" selectionMode="None" enableSelectAll="false" visibleRowCount="5">
+										<table:extension>
+											<m:OverflowToolbar>
+												<m:Title text="ICF Nodes"/>
+												<m:ToolbarSpacer/>
+												<Button id="btnActivateSICF" class="activeButton" tooltip="Activate" icon="sap-icon://activate" press="activateServicesSICF" text="Activate"
+													enabled="false"/>
+												<Link id="btnDownloadSICF" class="activeButton" tooltip="Download Activated Services" text="Download Activated Services"
+													press="downloadSICF" enabled="false"/>
+												<!--<Button id="btnDownloadSICF" class="activeButton" tooltip="Download" icon="sap-icon://download" press="downloadSICF" text="Download"-->
+												<!--  enabled="false"/>-->
+											</m:OverflowToolbar>
+										</table:extension>
+										<table:columns>
+											<table:Column >
+												<Label text="App Id"/>
+												<table:template>
+													<Text text="{fioriId}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column >
+												<Label text="App Name"/>
+												<table:template>
+													<Text text="{AppName}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column >
+												<Label text="ICF Nodes"/>
+												<table:template>
+													<Text text="{BSPApplicationURL}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column>
+												<Label text="Type"/>
+												<table:template>
+													<Text text="{Type}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column hAlign="Center">
+												<Label text="Status"/>
+												<table:template>
+													<core:Icon src="{path: 'Status', formatter: '.formatter.serviceStatus'}" class="size3"
+														color="{path: 'Status', formatter: '.formatter.colorStatus'}">
+														<core:layoutData>
+															<FlexItemData growFactor="1"/>
+														</core:layoutData>
+													</core:Icon>
+													<!--<Image src="{path: 'Status', formatter: '.formatter.serviceStatus'}" width="" decorative="false" backgroundSize="10px"/>-->
+												</table:template>
+											</table:Column>
+										</table:columns>
+									</table:Table>
+								</content>
+							</Panel>
+							<Panel id='id-panelAliasTable1' headerText="Activate Alias" expandable="true" class="sapUiContentPadding" width="auto" visible="false">
+								<content>
+									<table:Table id="id-AliasTable1" selectionMode="None" enableSelectAll="false" visibleRowCount="5">
+										<table:extension>
+											<m:OverflowToolbar>
+												<m:Title text="Alias"/>
+												<m:ToolbarSpacer/>
+												<Button id="btnActivateAlias" class="activeButton" tooltip="Activate" icon="sap-icon://activate" press="activateAlias" enabled="false"
+													text="Activate" visible="false"/>
+											</m:OverflowToolbar>
+										</table:extension>
+										<table:columns>
+											<table:Column>
+												<Label text="App Id"/>
+												<table:template>
+													<Text text="{fioriId}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column >
+												<Label text="System Alias"/>
+												<table:template>
+													<Text text="{Alias}"></Text>
+												</table:template>
+											</table:Column>
+											<table:Column hAlign="Center">
+												<Label text="Status"/>
+												<table:template>
+													<core:Icon src="{path: 'Status', formatter: '.formatter.serviceStatus'}" class="size3"
+														color="{path: 'Status', formatter: '.formatter.colorStatus'}">
+														<core:layoutData>
+															<FlexItemData growFactor="1"/>
+														</core:layoutData>
+													</core:Icon>
+													<!--<Image src="{path: 'Status', formatter: '.formatter.serviceStatus'}" width="" decorative="false" backgroundSize="10px"/>-->
+												</table:template>
+											</table:Column>
+										</table:columns>
+									</table:Table>
+								</content>
+							</Panel>
+							<Button id="id-btnStep5" text="Next Step" press="enableReportAnlyzer"/>
+							<!--<Button id="id-btnStep5" text="Go to Final Summary and Report" press="enableReportAnlyzer"/>-->
+						</WizardStep>
+						<WizardStep id="step6" title="Final Summary and Report">
+							<Panel>
+								<headerToolbar>
+									<OverflowToolbar height="3rem">
+										<!--<Title text="Header"/>-->
+										<ToolbarSpacer/>
+										<Button id="id-btnReport" text="Export Activation Log" press="downloadReport"/>
+										<Button id="id-btnReportMCA" text="Export Manual Config List" press="downloadReport"/>
+										<Button id="id-btnEmail" text="Send Export Files in Email" press="openEmailDialog"/>
+									</OverflowToolbar>
+								</headerToolbar>
+								<content>
+									<Panel headerText="Configuration Statistics by Count" expandable="false" class="sapUiContentPadding chartHeader" width="auto"
+										visible="false">
+										<layout:FixFlex id='chartReport' minFlexSize="250">
+											<layout:flexContent>
+												<viz:Popover id="idPopOverReport"></viz:Popover>
+												<viz:VizFrame id="idVizFrameReport" uiConfig="{applicationSet:'fiori'}" height='100%' width="100%" vizType='stacked_bar'>
+													<viz:dataset>
+														<viz.data:FlattenedDataset data="{/}">
+															<viz.data:dimensions>
+																<viz.data:DimensionDefinition name="Measure" value="{Measure}"/>
+																<viz.data:DimensionDefinition name="Type" value="{Type}"/>
+															</viz.data:dimensions>
+															<viz.data:measures>
+																<!--<viz.data:MeasureDefinition name="Revenue" value="{Revenue}"/>-->
+																<viz.data:MeasureDefinition name="Count" value="{Count}"/>
+															</viz.data:measures>
+														</viz.data:FlattenedDataset>
+													</viz:dataset>
+													<viz:feeds>
+														<!--<viz.feeds:FeedItem uid="size"  type="Measure" values="Status"/>-->
+														<!--<viz.feeds:FeedItem uid="color" type="Dimension" values="Type"/>-->
+														<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Count"/>
+														<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Measure"/>
+														<viz.feeds:FeedItem uid="color" type="Dimension" values="Type"/>
+													</viz:feeds>
+												</viz:VizFrame>
+											</layout:flexContent>
+										</layout:FixFlex>
+									</Panel>
+									<Panel headerText="Configuration Statistics by Percentage" expandable="false" class="sapUiContentPadding chartHeader" width="auto">
+										<layout:FixFlex id='chartFixFlexDonutReport' minFlexSize="250">
+											<layout:flexContent>
+												<viz:Popover id="idPopOverDonutReport"></viz:Popover>
+												<viz:VizFrame id="idVizFrameDonutReport" uiConfig="{applicationSet:'fiori'}" height='100%' width="100%" vizType='donut'>
+													<viz:dataset>
+														<viz.data:FlattenedDataset data="{/}">
+															<viz.data:dimensions>
+																<viz.data:DimensionDefinition name="Type" value="{Type}"/>
+																<!--<viz.data:DimensionDefinition name="Object" value="{Object}"/>-->
+															</viz.data:dimensions>
+															<viz.data:measures>
+																<!--<viz.data:MeasureDefinition name="Revenue" value="{Revenue}"/>-->
+																<viz.data:MeasureDefinition name="Count" value="{Count}"/>
+															</viz.data:measures>
+														</viz.data:FlattenedDataset>
+													</viz:dataset>
+													<viz:feeds>
+														<viz.feeds:FeedItem uid="size" type="Measure" values="Count"/>
+														<viz.feeds:FeedItem uid="color" type="Dimension" values="Type"/>
+													</viz:feeds>
+												</viz:VizFrame>
+											</layout:flexContent>
+										</layout:FixFlex>
+									</Panel>
+									<Panel headerText="Comparison - Before and After Automated Configurations" expandable="false" class="sapUiContentPadding chartHeader"
+										width="auto">
+										<layout:FixFlex id='chartCompare' minFlexSize="250">
+											<layout:flexContent>
+												<viz:Popover id="idPopOverCompare"></viz:Popover>
+												<viz:VizFrame id="idVizFrameCompare" uiConfig="{applicationSet:'fiori'}" height='100%' width="100%" vizType='stacked_bar'>
+													<viz:dataset>
+														<viz.data:FlattenedDataset data="{/}">
+															<viz.data:dimensions>
+																<viz.data:DimensionDefinition name="Measure" value="{Measure}"/>
+																<viz.data:DimensionDefinition name="Type" value="{Type}"/>
+															</viz.data:dimensions>
+															<viz.data:measures>
+																<!--<viz.data:MeasureDefinition name="Revenue" value="{Revenue}"/>-->
+																<viz.data:MeasureDefinition name="Count" value="{Count}"/>
+															</viz.data:measures>
+														</viz.data:FlattenedDataset>
+													</viz:dataset>
+													<viz:feeds>
+														<!--<viz.feeds:FeedItem uid="size"  type="Measure" values="Status"/>-->
+														<!--<viz.feeds:FeedItem uid="color" type="Dimension" values="Type"/>-->
+														<viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Count"/>
+														<viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Measure"/>
+														<viz.feeds:FeedItem uid="color" type="Dimension" values="Type"/>
+													</viz:feeds>
+												</viz:VizFrame>
+											</layout:flexContent>
+										</layout:FixFlex>
+									</Panel>
+								</content>
+							</Panel>
+						</WizardStep>
+					</Wizard>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

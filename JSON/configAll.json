@@ -1,0 +1,53 @@
+{
+	"columnData": [{
+		"columnName": "Config Type"
+	}, {
+		"columnName": "Status"
+	}, {
+		"columnName": "Type"
+	}, {
+		"columnName": "SubType"
+	}],
+
+	"rowData": [{
+		"Config Type": "Launchpad oData Service",
+		"Status": "",
+		"Type": "LS",
+		"SubType": "LS1"
+	}, {
+		"Config Type": "Launchpad ICF Service",
+		"Status": "",
+		"Type": "LS",
+		"SubType": "LS2"
+	}, {
+		"Config Type": "ESH Configuration Check",
+		"Status": "",
+		"Type": "ES",
+		"SubType": "ES1"
+	}, {
+		"Config Type": "Generic Search Connectors",
+		"Status": "",
+		"Type": "ES",
+		"SubType": "ES2"
+	}, {
+		"Config Type": "WebGUI Status",
+		"Status": "",
+		"Type": "GI",
+		"SubType": "GI1"
+	}, {
+		"Config Type": "BW Client",
+		"Status": "",
+		"Type": "BW",
+		"SubType": "BW1"
+	}, {
+		"Config Type": "BI Content Activation",
+		"Status": "",
+		"Type": "BW",
+		"SubType": "BW2"
+	}, {
+		"Config Type": "Technical Service Activation",
+		"Status": "",
+		"Type": "BW",
+		"SubType": "BW3"
+	}]
+}

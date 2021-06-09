@@ -1,0 +1,93 @@
+{
+    "resources": [
+        {
+            "name": "css/style.css"
+        },
+        {
+            "name": "JSON/configAll.json"
+        },
+        {
+            "name": "JSON/pieModel.json"
+        },
+        {
+            "name": "JSON/context.json"
+        },
+        {
+            "name": "JSON/RFCServers.json"
+        },
+        {
+            "name": "i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "logo-icon/capgemini-logo.png"
+        },
+        {
+            "name": "Component.js"
+        },
+        {
+            "name": "images/green.jpg"
+        },
+        {
+            "name": "images/red.jpg"
+        },
+        {
+            "name": "images/yellow.jpg"
+        },
+        {
+            "name": "images/green1.jpg"
+        },
+        {
+            "name": "manifest.json"
+        },
+        {
+            "name": "formatter/formatterNew.js"
+        },
+        {
+            "name": "fragment/aliasHelp.fragment.xml"
+        },
+        {
+            "name": "fragment/sendEmail.fragment.xml"
+        },
+        {
+            "name": "fragment/guideSTC.fragment.xml"
+        },
+        {
+            "name": "fragment/assignTRPackage.fragment.xml"
+        },
+        {
+            "name": "fragment/manualConfMessage.fragment.xml"
+        },
+        {
+            "name": "index.html"
+        },
+        {
+            "name": "libraries/downloadFile.js"
+        },
+        {
+            "name": "libraries/papaparse.js"
+        },
+        {
+            "name": "model/models.js"
+        },
+        {
+            "name": "localService/Z_FIORI_AUTO_CONFIG_SRV/metadata.xml"
+        },
+        {
+            "name": "localService/metadata.xml"
+        },
+        {
+            "name": "controller/home.controller.js"
+        },
+        {
+            "name": "view/home.view.xml"
+        },
+        {
+            "name": "Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "neo-app.json"
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form">
+	<Dialog id="helloDialog" title="Enter Email" class="sapUiSizeCompact">
+		<form:SimpleForm layout="ResponsiveGridLayout" editable="true" adjustLabelSpan="false" labelSpanXL="2" labelSpanL="2" labelSpanM="2"
+			labelSpanS="5">
+			<Input required="true" id="id-inpEmail"/>
+		</form:SimpleForm>
+		<OverflowToolbar><ToolbarSpacer/>
+			<Button type="Accept" text="Send" press="sendEmail"></Button>
+			<Button type="Reject" text="Cancel" press="closeEmail"></Button>
+		</OverflowToolbar>
+	</Dialog>
+</core:FragmentDefinition>

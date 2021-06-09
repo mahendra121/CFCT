@@ -1,0 +1,93 @@
+/* Enter your custom styles here */
+
+.sapMITBFilter .sapMITBText {
+    width: auto;
+}
+
+.sapMITBTab {
+    width: auto;
+}
+
+.paddingLink {
+    padding-top: 2%;
+}
+
+.paddingLbl {
+    padding: 1.2%;
+}
+
+.vAlignLbl {
+    vertical-align: super;
+}
+
+.sapMBarTitleStart .sapMBarPH {
+    text-align: center;
+}
+
+.tableHdr .sapMListTblHeaderCell {
+    padding: 0rem;
+}
+
+.stickyHeaderTable {
+    padding-right: 1%;
+}
+
+.activeButton {
+    padding-left: 20px;
+}
+
+.chartHeader {
+    text-align: center;
+    font-style: italic;
+}
+
+.infoIcon {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    box-sizing: border-box;
+    display: inline-block;
+    font-size: larger;
+    height: 1.5rem;
+    overflow: hidden;
+    width: 1.5rem;
+    font-family: SAP-icons;
+    color: white;
+    font-size: larger;
+    background-color: royalblue;
+    /*padding: 6px;*/
+}
+
+.infoPadding {
+    padding: 6px;
+}
+
+.releaseIDCombo {
+    align-self: center;
+    /*padding-left: 10px;*/
+}
+
+.statLabel {
+    text-align: center;
+    font-style: italic;
+}
+
+.statFormText {
+    font-weight: bold;
+}
+
+.noteStyle {
+    font-weight: bold;
+}
+
+.formEleStyle {
+    font-style: normal;
+}
+
+.bulletlist {
+    display: list-item;
+    list-style-type: disc;
+    list-style-position: outside;
+    margin-left: 20px;
+}
